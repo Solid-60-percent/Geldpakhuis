@@ -80,17 +80,12 @@ namespace GoogleARCore.Examples.HelloAR
 
         public float DropDelay = 0.5f;
 
-        /// <summary>
-        /// How far the drop can be away from the centre
-        /// </summary>
-        public float MaxDistanceOfCentre = 0.25f;
-        
+        public int DropHeight = 1;
+
         private const int _coinValue = 1;
 
         private static bool canDelay = true;
 
-        private Random _random = new Random(); 
-        
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
