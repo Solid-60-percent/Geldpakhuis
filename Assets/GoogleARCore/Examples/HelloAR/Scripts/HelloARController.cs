@@ -18,6 +18,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+
 namespace GoogleARCore.Examples.HelloAR
 {
     using System.Collections.Generic;
@@ -72,6 +74,12 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
+        private double _saldo = 10.0;
+
+        private double _coinValue = 1.0;
+
+        private double _onGround = 0;
+        
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -95,87 +103,112 @@ namespace GoogleARCore.Examples.HelloAR
 
             
             // if there is phone input....
-            Touch touch;
-            if (Input.touchCount < 0)
+
+            if (Input.touchCount > 0)
             {
-                touch = Input.GetTouch(0);
-                if (touch.phase != TouchPhase.Began)
+                Debug.Log("touch");
+                // If the player has not touched the screen, we are done with this update.
+                Touch touch;
+               
+                if (Input.touchCount < 1 )
                 {
+                    Debug.Log("no touch count");
+
                     return;
                 }
-                // Raycast against the location the player touched to search for planes.
-                TrackableHit hit;
-                TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
-                                                  TrackableHitFlags.FeaturePointWithSurfaceNormal;
-
-                if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
+                if ((touch = Input.GetTouch(0)).phase == TouchPhase.Began)
                 {
-                    // Use hit pose and camera pose to check if hittest is from the
-                    // back of the plane, if it is, no need to create the anchor.
-                    if ((hit.Trackable is DetectedPlane) &&
-                        Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
-                            hit.Pose.rotation * Vector3.up) < 0)
+                    TrackableHit hit;
+                    TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
+                                                      TrackableHitFlags.FeaturePointWithSurfaceNormal;
+                
+                    if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
                     {
-                        Debug.Log("Hit at back of the current DetectedPlane");
+                        Debug.Log("he he kut nichtrijder");
+
+                        SetObject(hit);
                     }
                     else
                     {
-                        // Instantiate Andy model at the hit pose.
-                        // todo do things here
-                        //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                        var andyObject = Instantiate(AndyAndroidPrefab, hit.Pose.position, hit.Pose.rotation);
-
-                        // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
-                        andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
-
-                        // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
-                        // world evolves.
-                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-
-                        // Make Andy model a child of the anchor.
-                        andyObject.transform.parent = anchor.transform;
+                        Debug.Log(touch.position.x);
+                        Debug.Log(touch.position.y);
+                        Debug.Log("Fout met touch");
                     }
+                }
+                else
+                {
+                    Debug.Log("Not began");
                 }
             } 
             else if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("klik");
                 TrackableHit hit;
                 TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                                                   TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
                 if (Frame.Raycast(Input.mousePosition.x, Input.mousePosition.y, raycastFilter, out hit))
                 {
-                    // Use hit pose and camera pose to check if hittest is from the
-                    // back of the plane, if it is, no need to create the anchor.
-                    if ((hit.Trackable is DetectedPlane) &&
-                        Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
-                            hit.Pose.rotation * Vector3.up) < 0)
-                    {
-                        Debug.Log("Hit at back of the current DetectedPlane");
-                    }
-                    else
-                    {
-                        // Instantiate Andy model at the hit pose.
-                        // todo do things here
-                        //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                        var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-
-                        // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
-                        andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
-
-                        // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
-                        // world evolves.
-                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-
-                        // Make Andy model a child of the anchor.
-                        andyObject.transform.parent = anchor.transform;
-                    }
+                   SetObject(hit);
                 }
             }
-
-            
         }
 
+        /// <summary>
+        /// returns true if you can render coin
+        /// </summary>
+        /// <returns></returns>
+        private bool HasEnoughSaldoToGenerate()
+        {
+            if (_saldo - _coinValue > 0)
+            {
+                _saldo -= _coinValue;
+                _onGround += _coinValue;
+                return true; 
+            }
+            else
+            {
+                // not enough money in saldo return false
+                return false;
+            }    
+        }
+        
+        private void SetObject(TrackableHit hit)
+        {
+
+            if (!HasEnoughSaldoToGenerate())
+            {
+                Debug.Log("Not enough saldo to generate");
+                return;
+            }
+            
+            // Use hit pose and camera pose to check if hittest is from the
+            // back of the plane, if it is, no need to create the anchor.
+            if (hit.Trackable is DetectedPlane &&
+                Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
+                    hit.Pose.rotation * Vector3.up) < 0)
+            {
+                Debug.Log("Hit at back of the current DetectedPlane");
+            }
+            else
+            {
+                // Instantiate Andy model at the hit pose.
+                // todo do things here
+                //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
+                var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
+
+                // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
+                andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
+
+                // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
+                // world evolves.
+                var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+
+                // Make Andy model a child of the anchor.
+                andyObject.transform.parent = anchor.transform;
+            }
+        }
+        
         /// <summary>
         /// Check and update the application lifecycle.
         /// </summary>
