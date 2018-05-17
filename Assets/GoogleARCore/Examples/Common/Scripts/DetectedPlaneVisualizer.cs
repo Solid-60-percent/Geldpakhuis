@@ -126,6 +126,7 @@ namespace GoogleARCore.Examples.Common
             
             m_DetectedPlane.GetBoundaryPolygon(m_MeshVertices);
 
+            
             if (_AreVerticesListsEqual(m_PreviousFrameMeshVertices, m_MeshVertices))
             {
                 return;
@@ -142,6 +143,8 @@ namespace GoogleARCore.Examples.Common
 
             int planePolygonCount = m_MeshVertices.Count;
 
+            
+            
             // The following code converts a polygon to a mesh with two polygons, inner
             // polygon renders with 100% opacity and fade out to outter polygon with opacity 0%, as shown below.
             // The indices shown in the diagram are used in comments below.
@@ -209,12 +212,47 @@ namespace GoogleARCore.Examples.Common
                 m_MeshIndices.Add(outerVertex2);
                 m_MeshIndices.Add(innerVertex2);
             }
+            
+            //VERTICAL
+            //Create mesh vertices at 3 points above the border
+            for (int i = 0; i < planePolygonCount; i++)
+            {
+                Vector3 v = m_MeshVertices[i] + new Vector3(0,3,0);
+                
+                Vector3 d = v - m_MeshVertices[i];
+                float scale = 1.0f - Mathf.Min(featherLength / d.magnitude, featherScale);
+                m_MeshVertices.Add((scale * d) + m_MeshVertices[i]);
+                m_MeshColors.Add(Color.black);
+            }
 
+            int firstUpperVertex = m_MeshVertices.Count - planePolygonCount;
+            
+            for (int i = 0; i < planePolygonCount; ++i)
+            {
+                int upperVertex1 = firstUpperVertex + i;
+                int upperVertex2 = firstUpperVertex + ((i + 1) % planePolygonCount);
+                int lowerVertex1 = firstOuterVertex + i;
+                int lowerVertex2 = firstOuterVertex + ((i + 1) % planePolygonCount);
+                
+                //triangle 1 - left upper corner
+                m_MeshIndices.Add(upperVertex1);
+                m_MeshIndices.Add(upperVertex2);
+                m_MeshIndices.Add(lowerVertex1);
+
+                //triangle 2 - right lower corner
+                m_MeshIndices.Add(lowerVertex1);
+                m_MeshIndices.Add(upperVertex2);
+                m_MeshIndices.Add(lowerVertex2);
+
+            }
+            
             m_Mesh.Clear();
             m_Mesh.SetVertices(m_MeshVertices);
             m_Mesh.SetIndices(m_MeshIndices.ToArray(), MeshTopology.Triangles, 0);
             m_Mesh.SetColors(m_MeshColors);
         }
+        
+        
 
         private bool _AreVerticesListsEqual(List<Vector3> firstList, List<Vector3> secondList)
         {

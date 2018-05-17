@@ -127,7 +127,7 @@ namespace GoogleARCore.Examples.HelloAR
                     {
                         Debug.Log("he he het werkt eindelijk...");
 
-                        SetObject(hit);
+                        InstantiateObject(hit);
                     }
                     else
                     {
@@ -156,7 +156,7 @@ namespace GoogleARCore.Examples.HelloAR
                     if (canDelay)
                     {
 //                        DelayLoop(hit, numberOfLoops);                        
-                        SetObject(hit);                        
+                        InstantiateObject(hit);
                     }
                 }
             }
@@ -208,7 +208,7 @@ namespace GoogleARCore.Examples.HelloAR
             
             for (int i = 0; i < numberOfLoops; i++)
             {            
-                SetObject(hit);
+                InstantiateObject(hit);
 //                Debug.Log("Object: " + i);
                 yield return new WaitForSeconds((float) 0.5);
             }
@@ -220,7 +220,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// Generates an object 
         /// </summary>
         /// <param name="hit"></param>
-        private void SetObject(TrackableHit hit)
+        private void InstantiateObject(TrackableHit hit)
         {
             if (!HasEnoughSaldoToGenerate())
             {
@@ -252,7 +252,8 @@ namespace GoogleARCore.Examples.HelloAR
                 Debug.Log("Create coins");
                     
 //                GameObject andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                GameObject andyObject = Instantiate(CoinsPrefab, p.position, p.rotation);
+//                GameObject andyObject = Instantiate(CoinsPrefab, p.position, p.rotation);
+                GameObject andyObject = Instantiate(CoinsPrefab, p.position + new Vector3(0,1,0), p.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
