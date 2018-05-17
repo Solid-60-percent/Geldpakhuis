@@ -131,7 +131,9 @@ namespace GoogleARCore.Examples.HelloAR
                     {
                         Debug.Log("he he het werkt eindelijk...");
 
-                        InstantiateObject(hit);
+                        int numberOfLoops = GetNumberOfLoops();
+                        DelayLoop(hit, numberOfLoops);
+//                        InstantiateObject(hit);
                     }
                     else
                     {
