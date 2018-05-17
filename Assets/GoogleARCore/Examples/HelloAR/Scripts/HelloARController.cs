@@ -18,6 +18,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+
 namespace GoogleARCore.Examples.HelloAR
 {
     using System.Collections.Generic;
@@ -72,6 +74,12 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
+        private double _saldo = 10.0;
+
+        private double _coinValue = 1.0;
+
+        private double _onGround = 0;
+        
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -108,7 +116,6 @@ namespace GoogleARCore.Examples.HelloAR
 
                     return;
                 }
-//                if ((touch = Input.GetTouch(0)).phase != TouchPhase.Began && touch.phase != TouchPhase.Stationary && touch.phase != TouchPhase.Moved)
                 if ((touch = Input.GetTouch(0)).phase == TouchPhase.Began)
                 {
                     TrackableHit hit;
@@ -119,7 +126,7 @@ namespace GoogleARCore.Examples.HelloAR
                     {
                         Debug.Log("he he kut nichtrijder");
 
-                        setObject(hit);
+                        SetObject(hit);
                     }
                     else
                     {
@@ -142,18 +149,42 @@ namespace GoogleARCore.Examples.HelloAR
 
                 if (Frame.Raycast(Input.mousePosition.x, Input.mousePosition.y, raycastFilter, out hit))
                 {
-                   setObject(hit);
+                   SetObject(hit);
                 }
             }
         }
 
-        private void setObject(TrackableHit hit)
+        /// <summary>
+        /// returns true if you can render coin
+        /// </summary>
+        /// <returns></returns>
+        private bool HasEnoughSaldoToGenerate()
         {
-            Debug.Log("set");
+            if (_saldo - _coinValue > 0)
+            {
+                _saldo -= _coinValue;
+                _onGround += _coinValue;
+                return true; 
+            }
+            else
+            {
+                // not enough money in saldo return false
+                return false;
+            }    
+        }
+        
+        private void SetObject(TrackableHit hit)
+        {
 
+            if (!HasEnoughSaldoToGenerate())
+            {
+                Debug.Log("Not enough saldo to generate");
+                return;
+            }
+            
             // Use hit pose and camera pose to check if hittest is from the
             // back of the plane, if it is, no need to create the anchor.
-            if ((hit.Trackable is DetectedPlane) &&
+            if (hit.Trackable is DetectedPlane &&
                 Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
                     hit.Pose.rotation * Vector3.up) < 0)
             {
