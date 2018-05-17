@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2b864354-d710-499e-b4c8-67c2af9ffccc" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="HelloARController.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/HelloAR/Scripts/HelloARController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="161" column="74" selection-start-line="161" selection-start-column="74" selection-end-line="161" selection-end-column="74" />
+              <folding>
+                <marker date="1526576646008" expanded="true" signature="0:834" ph="/* ----------------------------------------------------------------------- ... */" />
+                <marker date="1526576646008" expanded="true" signature="875:10194" ph="{...}" />
+                <marker date="1526576646008" expanded="false" signature="888:1140" ph="..." />
+                <marker date="1526576646008" expanded="true" signature="1153:1223" ph="/// Controls the HelloAR example. ... " />
+                <marker date="1526576646008" expanded="true" signature="1274:10192" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="1289:1433" ph="/// The first-person camera being used to render the passthrough camera image (i.e. AR background). ... " />
+                <marker date="1526576646008" expanded="true" signature="1484:1587" ph="/// A prefab for tracking and visualizing detected planes. ... " />
+                <marker date="1526576646008" expanded="true" signature="1644:1756" ph="/// A model to place when a raycast from a user touch hits a plane. ... " />
+                <marker date="1526576646008" expanded="true" signature="1860:1986" ph="/// A gameobject parenting UI for displaying the &quot;searching for planes&quot; snackbar. ... " />
+                <marker date="1526576646008" expanded="true" signature="2043:2169" ph="/// The rotation in degrees need to apply to model when the Andy model is placed. ... " />
+                <marker date="1526576646008" expanded="true" signature="2233:2435" ph="/// A list to hold all planes ARCore is tracking in the current frame. This object is used across ... " />
+                <marker date="1526576646008" expanded="true" signature="2522:2668" ph="/// True if the app is in the process of quitting due to an ARCore connection error, otherwise false. ... " />
+                <marker date="1526576646008" expanded="true" signature="2721:2796" ph="/// The Unity Update() method. ... " />
+                <marker date="1526576646008" expanded="true" signature="2825:7614" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="3112:3324" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="3202:3310" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="3399:7604" ph="INPUT REACTION" />
+                <marker date="1526576646008" expanded="true" signature="3528:5636" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="3638:3702" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="4109:5622" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="4148:4293" ph="/* Use hit pose and camera pose to check if hittest is from the ... */" />
+                <marker date="1526576646008" expanded="true" signature="4512:4635" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="4660:5604" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="4707:4903" ph="/* Instantiate Andy model at the hit pose. ... */" />
+                <marker date="1526576646008" expanded="true" signature="5236:5368" ph="/* Create an anchor to allow ARCore to track the hitpoint as understanding of the physical ... */" />
+                <marker date="1526576646008" expanded="true" signature="5687:7581" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="6029:7567" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="6068:6213" ph="/* Use hit pose and camera pose to check if hittest is from the ... */" />
+                <marker date="1526576646008" expanded="true" signature="6432:6555" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="6580:7549" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="6627:6823" ph="/* Instantiate Andy model at the hit pose. ... */" />
+                <marker date="1526576646008" expanded="true" signature="7181:7313" ph="/* Create an anchor to allow ARCore to track the hitpoint as understanding of the physical ... */" />
+                <marker date="1526576646008" expanded="true" signature="7624:7716" ph="/// Check and update the application lifecycle. ... " />
+                <marker date="1526576646008" expanded="true" signature="7767:9074" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="7886:7950" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="8074:8223" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="8240:8331" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="8362:8414" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="8592:8796" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="8843:9064" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="9084:9163" ph="/// Actually quit the application. ... " />
+                <marker date="1526576646008" expanded="true" signature="9194:9246" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="9256:9414" ph="/// Show an Android toast message. ... " />
+                <marker date="1526576646008" expanded="true" signature="9476:10186" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="9732:10176" ph="{...}" />
+                <marker date="1526576646008" expanded="true" signature="9920:10159" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DetectedPlaneVisualizer.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneVisualizer.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1191">
+              <caret line="232" column="9" selection-start-line="232" selection-start-column="9" selection-end-line="232" selection-end-column="9" />
+              <folding>
+                <marker date="1526568945312" expanded="true" signature="0:840" ph="/* ----------------------------------------------------------------------- ... */" />
+                <marker date="1526568945312" expanded="true" signature="880:8403" ph="{...}" />
+                <marker date="1526568945312" expanded="false" signature="893:967" ph="..." />
+                <marker date="1526568945312" expanded="true" signature="973:1067" ph="/// Visualizes a single DetectedPlane in the Unity scene. ... " />
+                <marker date="1526568945312" expanded="true" signature="1124:8401" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="1246:1943" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="2530:2604" ph="/// The Unity Awake() method. ... " />
+                <marker date="1526568945312" expanded="true" signature="2632:2848" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="2858:2933" ph="/// The Unity Update() method. ... " />
+                <marker date="1526568945312" expanded="true" signature="2962:3481" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="3013:3065" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="3122:3211" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="3289:3391" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="3491:3665" ph="/// Initializes the DetectedPlaneVisualizer with a DetectedPlane. ... " />
+                <marker date="1526568945312" expanded="true" signature="3717:4012" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="4022:4134" ph="/// Update mesh with a list of Vector3 and plane's center position. ... " />
+                <marker date="1526568945312" expanded="true" signature="4177:7835" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="4350:4402" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="4819:5449" ph="/* The following code converts a polygon to a mesh with two polygons, inner ... */" />
+                <marker date="1526568945312" expanded="true" signature="5598:5673" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="5983:6372" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="6619:6822" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="6836:6957" ph="/* Generate triangle (0, 1, 4), (4, 1, 5), (5, 1, 2), (5, 2, 6), (6, 2, 3), (6, 3, 7) ... */" />
+                <marker date="1526568945312" expanded="true" signature="7013:7621" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="7931:8292" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="7994:8052" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="8107:8256" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="8172:8242" ph="{...}" />
+                <marker date="1526568945312" expanded="true" signature="8327:8395" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DetectedPlaneGenerator.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneGenerator.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-144">
+              <folding>
+                <marker date="1525477745000" expanded="true" signature="0:839" ph="/* ----------------------------------------------------------------------- ... */" />
+                <marker date="1525477745000" expanded="true" signature="879:2659" ph="{...}" />
+                <marker date="1525477745000" expanded="false" signature="892:966" ph="..." />
+                <marker date="1525477745000" expanded="true" signature="972:1071" ph="/// Manages the visualization of detected planes in the scene. ... " />
+                <marker date="1525477745000" expanded="true" signature="1127:2657" ph="{...}" />
+                <marker date="1525477745000" expanded="true" signature="1142:1245" ph="/// A prefab for tracking and visualizing detected planes. ... " />
+                <marker date="1525477745000" expanded="true" signature="1302:1507" ph="/// A list to hold new planes ARCore began tracking in the current frame. This object is used across ... " />
+                <marker date="1525477745000" expanded="true" signature="1594:1667" ph="/// The Unity Update method. ... " />
+                <marker date="1525477745000" expanded="true" signature="1696:2651" ph="{...}" />
+                <marker date="1525477745000" expanded="true" signature="1819:1871" ph="{...}" />
+                <marker date="1525477745000" expanded="true" signature="2133:2641" ph="{...}" />
+                <marker date="1525477745000" expanded="true" signature="2164:2410" ph="/* Instantiate a plane visualization prefab and set it to track the new plane. The transform is set to ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/HelloAR/Scripts/HelloARController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneVisualizer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneVisualizer.cs" />
+        <option value="$PROJECT_DIR$/Assets/GoogleARCore/Examples/HelloAR/Scripts/HelloARController.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="264" />
+    <option name="y" value="-22" />
+    <option name="width" value="1440" />
+    <option name="height" value="788" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="UnityExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="UnityExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Geldpakhuis" type="483dac07:UnityExplorerNode$Root" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+              <item name="" type="1045f7f1:UnityExplorerNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-hidden-items" value="false" />
+      </pane>
+      <pane id="SolutionExplorer">
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b864354-d710-499e-b4c8-67c2af9ffccc" name="Default" comment="" />
+      <created>1526562326493</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1526562326493</updated>
+      <workItem from="1526562337571" duration="8649000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8649000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Errors In Solution" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Unit Tests" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16471216" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unity" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="NuGet" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+    </layout>
+  </component>
+  <component name="UnityProjectConfiguration" isUnityUI="true" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneVisualizer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1191">
+          <caret line="232" column="9" selection-start-line="232" selection-start-column="9" selection-end-line="232" selection-end-column="9" />
+          <folding>
+            <marker date="1526568945312" expanded="true" signature="0:840" ph="/* ----------------------------------------------------------------------- ... */" />
+            <marker date="1526568945312" expanded="true" signature="880:8403" ph="{...}" />
+            <marker date="1526568945312" expanded="false" signature="893:967" ph="..." />
+            <marker date="1526568945312" expanded="true" signature="973:1067" ph="/// Visualizes a single DetectedPlane in the Unity scene. ... " />
+            <marker date="1526568945312" expanded="true" signature="1124:8401" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="1246:1943" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="2530:2604" ph="/// The Unity Awake() method. ... " />
+            <marker date="1526568945312" expanded="true" signature="2632:2848" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="2858:2933" ph="/// The Unity Update() method. ... " />
+            <marker date="1526568945312" expanded="true" signature="2962:3481" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="3013:3065" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="3122:3211" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="3289:3391" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="3491:3665" ph="/// Initializes the DetectedPlaneVisualizer with a DetectedPlane. ... " />
+            <marker date="1526568945312" expanded="true" signature="3717:4012" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="4022:4134" ph="/// Update mesh with a list of Vector3 and plane's center position. ... " />
+            <marker date="1526568945312" expanded="true" signature="4177:7835" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="4350:4402" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="4819:5449" ph="/* The following code converts a polygon to a mesh with two polygons, inner ... */" />
+            <marker date="1526568945312" expanded="true" signature="5598:5673" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="5983:6372" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="6619:6822" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="6836:6957" ph="/* Generate triangle (0, 1, 4), (4, 1, 5), (5, 1, 2), (5, 2, 6), (6, 2, 3), (6, 3, 7) ... */" />
+            <marker date="1526568945312" expanded="true" signature="7013:7621" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="7931:8292" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="7994:8052" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="8107:8256" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="8172:8242" ph="{...}" />
+            <marker date="1526568945312" expanded="true" signature="8327:8395" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/Common/Scripts/DetectedPlaneGenerator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <folding>
+            <marker date="1525477745000" expanded="true" signature="0:839" ph="/* ----------------------------------------------------------------------- ... */" />
+            <marker date="1525477745000" expanded="true" signature="879:2659" ph="{...}" />
+            <marker date="1525477745000" expanded="false" signature="892:966" ph="..." />
+            <marker date="1525477745000" expanded="true" signature="972:1071" ph="/// Manages the visualization of detected planes in the scene. ... " />
+            <marker date="1525477745000" expanded="true" signature="1127:2657" ph="{...}" />
+            <marker date="1525477745000" expanded="true" signature="1142:1245" ph="/// A prefab for tracking and visualizing detected planes. ... " />
+            <marker date="1525477745000" expanded="true" signature="1302:1507" ph="/// A list to hold new planes ARCore began tracking in the current frame. This object is used across ... " />
+            <marker date="1525477745000" expanded="true" signature="1594:1667" ph="/// The Unity Update method. ... " />
+            <marker date="1525477745000" expanded="true" signature="1696:2651" ph="{...}" />
+            <marker date="1525477745000" expanded="true" signature="1819:1871" ph="{...}" />
+            <marker date="1525477745000" expanded="true" signature="2133:2641" ph="{...}" />
+            <marker date="1525477745000" expanded="true" signature="2164:2410" ph="/* Instantiate a plane visualization prefab and set it to track the new plane. The transform is set to ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/GoogleARCore/Examples/HelloAR/Scripts/HelloARController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="161" column="74" selection-start-line="161" selection-start-column="74" selection-end-line="161" selection-end-column="74" />
+          <folding>
+            <marker date="1526576646008" expanded="true" signature="0:834" ph="/* ----------------------------------------------------------------------- ... */" />
+            <marker date="1526576646008" expanded="true" signature="875:10194" ph="{...}" />
+            <marker date="1526576646008" expanded="false" signature="888:1140" ph="..." />
+            <marker date="1526576646008" expanded="true" signature="1153:1223" ph="/// Controls the HelloAR example. ... " />
+            <marker date="1526576646008" expanded="true" signature="1274:10192" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="1289:1433" ph="/// The first-person camera being used to render the passthrough camera image (i.e. AR background). ... " />
+            <marker date="1526576646008" expanded="true" signature="1484:1587" ph="/// A prefab for tracking and visualizing detected planes. ... " />
+            <marker date="1526576646008" expanded="true" signature="1644:1756" ph="/// A model to place when a raycast from a user touch hits a plane. ... " />
+            <marker date="1526576646008" expanded="true" signature="1860:1986" ph="/// A gameobject parenting UI for displaying the &quot;searching for planes&quot; snackbar. ... " />
+            <marker date="1526576646008" expanded="true" signature="2043:2169" ph="/// The rotation in degrees need to apply to model when the Andy model is placed. ... " />
+            <marker date="1526576646008" expanded="true" signature="2233:2435" ph="/// A list to hold all planes ARCore is tracking in the current frame. This object is used across ... " />
+            <marker date="1526576646008" expanded="true" signature="2522:2668" ph="/// True if the app is in the process of quitting due to an ARCore connection error, otherwise false. ... " />
+            <marker date="1526576646008" expanded="true" signature="2721:2796" ph="/// The Unity Update() method. ... " />
+            <marker date="1526576646008" expanded="true" signature="2825:7614" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="3112:3324" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="3202:3310" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="3399:7604" ph="INPUT REACTION" />
+            <marker date="1526576646008" expanded="true" signature="3528:5636" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="3638:3702" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="4109:5622" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="4148:4293" ph="/* Use hit pose and camera pose to check if hittest is from the ... */" />
+            <marker date="1526576646008" expanded="true" signature="4512:4635" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="4660:5604" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="4707:4903" ph="/* Instantiate Andy model at the hit pose. ... */" />
+            <marker date="1526576646008" expanded="true" signature="5236:5368" ph="/* Create an anchor to allow ARCore to track the hitpoint as understanding of the physical ... */" />
+            <marker date="1526576646008" expanded="true" signature="5687:7581" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="6029:7567" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="6068:6213" ph="/* Use hit pose and camera pose to check if hittest is from the ... */" />
+            <marker date="1526576646008" expanded="true" signature="6432:6555" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="6580:7549" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="6627:6823" ph="/* Instantiate Andy model at the hit pose. ... */" />
+            <marker date="1526576646008" expanded="true" signature="7181:7313" ph="/* Create an anchor to allow ARCore to track the hitpoint as understanding of the physical ... */" />
+            <marker date="1526576646008" expanded="true" signature="7624:7716" ph="/// Check and update the application lifecycle. ... " />
+            <marker date="1526576646008" expanded="true" signature="7767:9074" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="7886:7950" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="8074:8223" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="8240:8331" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="8362:8414" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="8592:8796" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="8843:9064" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="9084:9163" ph="/// Actually quit the application. ... " />
+            <marker date="1526576646008" expanded="true" signature="9194:9246" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="9256:9414" ph="/// Show an Android toast message. ... " />
+            <marker date="1526576646008" expanded="true" signature="9476:10186" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="9732:10176" ph="{...}" />
+            <marker date="1526576646008" expanded="true" signature="9920:10159" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
