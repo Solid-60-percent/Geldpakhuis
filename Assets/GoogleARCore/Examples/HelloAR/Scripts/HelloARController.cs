@@ -59,6 +59,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         public GameObject SearchingForPlaneUI;
 
+        public GameObject PlaneGenerator; 
         /// <summary>
         /// The rotation in degrees need to apply to model when the Andy model is placed.
         /// </summary>
@@ -154,7 +155,8 @@ namespace GoogleARCore.Examples.HelloAR
 
                     if (canDelay)
                     {
-                        DelayLoop(hit, numberOfLoops);                        
+//                        DelayLoop(hit, numberOfLoops);                        
+                        SetObject(hit);                        
                     }
                 }
             }
@@ -237,10 +239,20 @@ namespace GoogleARCore.Examples.HelloAR
             {
                 // Instantiate Andy model at the hit pose.
                 // todo do things here
-                //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                Debug.Log("Create coins");
+                DetectedPlaneVisualizer detectedPlaneVisualizer = PlaneGenerator.GetComponentInChildren<DetectedPlaneVisualizer>();
+
+                if (detectedPlaneVisualizer == null)
+                {
+                    Debug.Log("Plane visualizer is null");
+                    return;
+                }
+
+                Pose p = detectedPlaneVisualizer.getDetectedPlane().CenterPose;
                 
-                GameObject andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
+                Debug.Log("Create coins");
+                    
+//                GameObject andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
+                GameObject andyObject = Instantiate(CoinsPrefab, p.position, p.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
