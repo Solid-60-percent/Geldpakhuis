@@ -74,12 +74,10 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
-        private double _saldo = 10.0;
+        private int _saldo = 10;
 
-        private double _coinValue = 1.0;
+        private const int _coinValue = 1;
 
-        private double _onGround = 0;
-        
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -89,18 +87,17 @@ namespace GoogleARCore.Examples.HelloAR
 
             // Hide snackbar when currently tracking at least one plane.
             Session.GetTrackables<DetectedPlane>(m_AllPlanes);
-            bool showSearchingUI = true;
+            bool showSearchingUi = true;
             for (int i = 0; i < m_AllPlanes.Count; i++)
             {
                 if (m_AllPlanes[i].TrackingState == TrackingState.Tracking)
                 {
-                    showSearchingUI = false;
+                    showSearchingUi = false;
                     break;
                 }
             }
 
-            SearchingForPlaneUI.SetActive(showSearchingUI);
-
+            SearchingForPlaneUI.SetActive(showSearchingUi);
             
             // if there is phone input....
 
@@ -124,7 +121,7 @@ namespace GoogleARCore.Examples.HelloAR
                 
                     if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
                     {
-                        Debug.Log("he he kut nichtrijder");
+                        Debug.Log("he he het werkt eindelijk...");
 
                         SetObject(hit);
                     }
@@ -149,7 +146,10 @@ namespace GoogleARCore.Examples.HelloAR
 
                 if (Frame.Raycast(Input.mousePosition.x, Input.mousePosition.y, raycastFilter, out hit))
                 {
-                   SetObject(hit);
+                    Debug.Log("Start looping");
+                    int numberOfLoops = GetNumberOfLoops();
+                    Loop(hit, numberOfLoops);
+                    //                    SetObject(hit);
                 }
             }
         }
@@ -163,22 +163,40 @@ namespace GoogleARCore.Examples.HelloAR
             if (_saldo - _coinValue > 0)
             {
                 _saldo -= _coinValue;
-                _onGround += _coinValue;
                 return true; 
             }
             else
             {
+                Debug.Log("Not enough saldo to generate");
                 // not enough money in saldo return false
                 return false;
             }    
         }
+
+        private int GetNumberOfLoops()
+        {
+            int nLoops = _saldo / _coinValue;
+            
+            Debug.Log("Saldo: " + nLoops);
+            Debug.Log("coin value: " + nLoops);
+            Debug.Log("nLoops: " + nLoops);
+            return nLoops;
+        }
+
+        private void Loop(TrackableHit hit, int numberOfLoops)
+        {
+            for (int i = 0; i < numberOfLoops; i++)
+            {            
+                SetObject(hit);
+            }
+            
+            Debug.Log("End loop");
+        }
         
         private void SetObject(TrackableHit hit)
         {
-
             if (!HasEnoughSaldoToGenerate())
             {
-                Debug.Log("Not enough saldo to generate");
                 return;
             }
             
@@ -195,14 +213,16 @@ namespace GoogleARCore.Examples.HelloAR
                 // Instantiate Andy model at the hit pose.
                 // todo do things here
                 //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
+                Debug.Log("Create coins");
+                
+                GameObject andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
 
                 // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
                 // world evolves.
-                var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
                 // Make Andy model a child of the anchor.
                 andyObject.transform.parent = anchor.transform;
