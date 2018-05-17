@@ -64,7 +64,7 @@ namespace GoogleARCore.Examples.Common
         private Mesh m_Mesh;
 
         private MeshRenderer m_MeshRenderer;
-
+        private MeshCollider m_MeshCollider;
         /// <summary>
         /// The Unity Awake() method.
         /// </summary>
@@ -72,6 +72,7 @@ namespace GoogleARCore.Examples.Common
         {
             m_Mesh = GetComponent<MeshFilter>().mesh;
             m_MeshRenderer = GetComponent<UnityEngine.MeshRenderer>();
+            m_MeshCollider = GetComponent<UnityEngine.MeshCollider>();
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace GoogleARCore.Examples.Common
             m_DetectedPlane = plane;
             m_MeshRenderer.material.SetColor("_GridColor", k_PlaneColors[s_PlaneCount++ % k_PlaneColors.Length]);
             m_MeshRenderer.material.SetFloat("_UvRotation", Random.Range(0.0f, 360.0f));
-
+            
             Update();
         }
 
@@ -117,6 +118,7 @@ namespace GoogleARCore.Examples.Common
         /// </summary>
         private void _UpdateMeshIfNeeded()
         {
+            
             m_DetectedPlane.GetBoundaryPolygon(m_MeshVertices);
 
             if (_AreVerticesListsEqual(m_PreviousFrameMeshVertices, m_MeshVertices))
@@ -225,6 +227,11 @@ namespace GoogleARCore.Examples.Common
             }
 
             return true;
+        }
+
+        private void LateUpdate()
+        {
+            m_MeshCollider.sharedMesh = m_Mesh;
         }
     }
 }
