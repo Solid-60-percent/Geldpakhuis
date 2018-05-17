@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Collections;
 
 namespace GoogleARCore.Examples.HelloAR
 {
@@ -58,6 +59,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         public GameObject SearchingForPlaneUI;
 
+        public GameObject PlaneGenerator; 
         /// <summary>
         /// The rotation in degrees need to apply to model when the Andy model is placed.
         /// </summary>
@@ -74,12 +76,16 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
-        private double _saldo = 10.0;
+        public int Saldo = 10;
 
-        private double _coinValue = 1.0;
+        public float DropDelay = 0.5f;
 
-        private double _onGround = 0;
-        
+        public int DropHeight = 1;
+
+        private const int _coinValue = 1;
+
+        private static bool canDelay = true;
+
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -89,25 +95,32 @@ namespace GoogleARCore.Examples.HelloAR
 
             // Hide snackbar when currently tracking at least one plane.
             Session.GetTrackables<DetectedPlane>(m_AllPlanes);
-            bool showSearchingUI = true;
+            bool showSearchingUi = true;
             for (int i = 0; i < m_AllPlanes.Count; i++)
             {
                 if (m_AllPlanes[i].TrackingState == TrackingState.Tracking)
                 {
-                    showSearchingUI = false;
+                    showSearchingUi = false;
                     break;
                 }
             }
 
-            SearchingForPlaneUI.SetActive(showSearchingUI);
-
+            SearchingForPlaneUI.SetActive(showSearchingUi);
             
             // if there is phone input....
 
             if (Input.touchCount > 0)
             {
+                Debug.Log("touch");
+                // If the player has not touched the screen, we are done with this update.
                 Touch touch;
-                
+               
+                if (Input.touchCount < 1 )
+                {
+                    Debug.Log("no touch count");
+
+                    return;
+                }
                 if ((touch = Input.GetTouch(0)).phase == TouchPhase.Began)
                 {
                     TrackableHit hit;
@@ -116,50 +129,119 @@ namespace GoogleARCore.Examples.HelloAR
                 
                     if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
                     {
+                        Debug.Log("he he het werkt eindelijk...");
 
-                        InstantiateObject(hit);
+                        int numberOfLoops = GetNumberOfLoops();
+                        DelayLoop(hit, numberOfLoops);
+//                        InstantiateObject(hit);
                     }
+                    else
+                    {
+                        Debug.Log(touch.position.x);
+                        Debug.Log(touch.position.y);
+                        Debug.Log("Fout met touch");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Not began");
                 }
             } 
             else if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("klik");
                 TrackableHit hit;
                 TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                                                   TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
                 if (Frame.Raycast(Input.mousePosition.x, Input.mousePosition.y, raycastFilter, out hit))
                 {
-                   InstantiateObject(hit);
+                    Debug.Log("Start looping");
+                    int numberOfLoops = GetNumberOfLoops();
+
+                    if (canDelay)
+                    {
+                        DelayLoop(hit, numberOfLoops);                        
+//                        InstantiateObject(hit);
+                    }
                 }
             }
         }
 
         /// <summary>
         /// returns true if you can render coin
+        /// TODO remove/ ignore if loop works well 
         /// </summary>
-        /// <returns></returns>
         private bool HasEnoughSaldoToGenerate()
         {
-            if (_saldo - _coinValue > 0)
+            if (Saldo - _coinValue > 0)
             {
-                _saldo -= _coinValue;
-                _onGround += _coinValue;
+                Saldo -= _coinValue;
                 return true; 
             }
             else
             {
+                Debug.Log("Not enough saldo to generate");
                 // not enough money in saldo return false
                 return false;
             }    
         }
-        
-        
-        private void InstantiateObject(TrackableHit hit)
-        {
 
+        /// <summary>
+        /// Divedes salde by coinvalue to calculate how many coins can drop
+        /// </summary>
+        private int GetNumberOfLoops()
+        {
+            int nLoops = Saldo / _coinValue;
+            
+            Debug.Log("Saldo: " + nLoops);
+            Debug.Log("coin value: " + nLoops);
+            Debug.Log("nLoops: " + nLoops);
+            return nLoops;
+        }
+
+        /// <summary>
+        /// Starts the coroutine for the delayed loop
+        /// </summary>
+        private void DelayLoop(TrackableHit hit, int numberOfLoops)
+        {
+            StartCoroutine(Corotine(hit, numberOfLoops));
+        }
+
+        private IEnumerator Corotine(TrackableHit hit, int numberOfLoops)
+        {
+            Debug.Log("Start delay loop"); 
+            
+            DetectedPlaneVisualizer detectedPlaneVisualizer = PlaneGenerator.GetComponentInChildren<DetectedPlaneVisualizer>();
+
+            if (detectedPlaneVisualizer == null)
+            {
+                Debug.Log("Plane visualizer is null");
+            }
+
+            DetectedPlane plane = detectedPlaneVisualizer.getDetectedPlane();
+            Pose planePos = plane.CenterPose;
+            
+            float x = plane.ExtentX * 0.1f;   
+
+            for (int i = 0; i < numberOfLoops; i++)
+            {            
+                InstantiateObject(hit, planePos, x);
+//                Debug.Log("Object: " + i);
+                yield return new WaitForSeconds(DropDelay);
+            }
+            
+            Debug.Log("End delay loop"); 
+        }
+        
+        /// <summary>
+        /// Generates an object 
+        /// </summary>
+        /// <param name="hit"></param>
+        private void InstantiateObject(TrackableHit hit, Pose planePos, float x)
+        {
             if (!HasEnoughSaldoToGenerate())
             {
-                Debug.Log("Not enough saldo to generate");
                 return;
             }
             
@@ -175,15 +257,20 @@ namespace GoogleARCore.Examples.HelloAR
             {
                 // Instantiate Andy model at the hit pose.
                 // todo do things here
-                //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                var andyObject = Instantiate(CoinsPrefab, hit.Pose.position + new Vector3(0,1,0), hit.Pose.rotation);
+              
+                
+                
+                float randomRangeX = Random.Range(-x, x);
+                //float randomRangeY = Random.Range(-x, x);
+
+                GameObject andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeX), planePos.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
 
                 // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
                 // world evolves.
-                var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
                 // Make Andy model a child of the anchor.
                 andyObject.transform.parent = anchor.transform;
