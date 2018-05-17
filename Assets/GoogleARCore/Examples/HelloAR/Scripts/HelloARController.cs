@@ -126,7 +126,7 @@ namespace GoogleARCore.Examples.HelloAR
                     {
                         Debug.Log("he he kut nichtrijder");
 
-                        SetObject(hit);
+                        InstantiateObject(hit);
                     }
                     else
                     {
@@ -149,7 +149,7 @@ namespace GoogleARCore.Examples.HelloAR
 
                 if (Frame.Raycast(Input.mousePosition.x, Input.mousePosition.y, raycastFilter, out hit))
                 {
-                   SetObject(hit);
+                   InstantiateObject(hit);
                 }
             }
         }
@@ -173,7 +173,8 @@ namespace GoogleARCore.Examples.HelloAR
             }    
         }
         
-        private void SetObject(TrackableHit hit)
+        
+        private void InstantiateObject(TrackableHit hit)
         {
 
             if (!HasEnoughSaldoToGenerate())
@@ -195,7 +196,7 @@ namespace GoogleARCore.Examples.HelloAR
                 // Instantiate Andy model at the hit pose.
                 // todo do things here
                 //var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-                var andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
+                var andyObject = Instantiate(CoinsPrefab, hit.Pose.position + new Vector3(0,1,0), hit.Pose.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
