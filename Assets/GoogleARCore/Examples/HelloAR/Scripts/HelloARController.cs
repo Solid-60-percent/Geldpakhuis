@@ -106,16 +106,8 @@ namespace GoogleARCore.Examples.HelloAR
 
             if (Input.touchCount > 0)
             {
-                Debug.Log("touch");
-                // If the player has not touched the screen, we are done with this update.
                 Touch touch;
-               
-                if (Input.touchCount < 1 )
-                {
-                    Debug.Log("no touch count");
-
-                    return;
-                }
+                
                 if ((touch = Input.GetTouch(0)).phase == TouchPhase.Began)
                 {
                     TrackableHit hit;
@@ -124,25 +116,13 @@ namespace GoogleARCore.Examples.HelloAR
                 
                     if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
                     {
-                        Debug.Log("he he kut nichtrijder");
 
                         InstantiateObject(hit);
                     }
-                    else
-                    {
-                        Debug.Log(touch.position.x);
-                        Debug.Log(touch.position.y);
-                        Debug.Log("Fout met touch");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Not began");
                 }
             } 
             else if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("klik");
                 TrackableHit hit;
                 TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                                                   TrackableHitFlags.FeaturePointWithSurfaceNormal;
