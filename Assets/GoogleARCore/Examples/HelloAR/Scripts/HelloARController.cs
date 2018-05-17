@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Collections;
 
 namespace GoogleARCore.Examples.HelloAR
 {
@@ -74,10 +75,12 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
-        private int _saldo = 10;
+        public int Saldo = 10;
 
         private const int _coinValue = 1;
 
+        private static bool canDelay = true; 
+        
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -148,21 +151,24 @@ namespace GoogleARCore.Examples.HelloAR
                 {
                     Debug.Log("Start looping");
                     int numberOfLoops = GetNumberOfLoops();
-                    Loop(hit, numberOfLoops);
-                    //                    SetObject(hit);
+
+                    if (canDelay)
+                    {
+                        DelayLoop(hit, numberOfLoops);                        
+                    }
                 }
             }
         }
 
         /// <summary>
         /// returns true if you can render coin
+        /// TODO remove/ ignore if loop works well 
         /// </summary>
-        /// <returns></returns>
         private bool HasEnoughSaldoToGenerate()
         {
-            if (_saldo - _coinValue > 0)
+            if (Saldo - _coinValue > 0)
             {
-                _saldo -= _coinValue;
+                Saldo -= _coinValue;
                 return true; 
             }
             else
@@ -173,9 +179,12 @@ namespace GoogleARCore.Examples.HelloAR
             }    
         }
 
+        /// <summary>
+        /// Divedes salde by coinvalue to calculate how many coins can drop
+        /// </summary>
         private int GetNumberOfLoops()
         {
-            int nLoops = _saldo / _coinValue;
+            int nLoops = Saldo / _coinValue;
             
             Debug.Log("Saldo: " + nLoops);
             Debug.Log("coin value: " + nLoops);
@@ -183,16 +192,32 @@ namespace GoogleARCore.Examples.HelloAR
             return nLoops;
         }
 
-        private void Loop(TrackableHit hit, int numberOfLoops)
+        /// <summary>
+        /// Starts the coroutine for the delayed loop
+        /// </summary>
+        private void DelayLoop(TrackableHit hit, int numberOfLoops)
         {
+            StartCoroutine(Corotine(hit, numberOfLoops));
+        }
+
+        private IEnumerator Corotine(TrackableHit hit, int numberOfLoops)
+        {
+            Debug.Log("Start delay loop"); 
+            
             for (int i = 0; i < numberOfLoops; i++)
             {            
                 SetObject(hit);
+//                Debug.Log("Object: " + i);
+                yield return new WaitForSeconds((float) 0.5);
             }
             
-            Debug.Log("End loop");
+            Debug.Log("End delay loop"); 
         }
         
+        /// <summary>
+        /// Generates an object 
+        /// </summary>
+        /// <param name="hit"></param>
         private void SetObject(TrackableHit hit)
         {
             if (!HasEnoughSaldoToGenerate())
