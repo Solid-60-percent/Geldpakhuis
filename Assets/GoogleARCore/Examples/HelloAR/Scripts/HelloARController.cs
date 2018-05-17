@@ -80,8 +80,6 @@ namespace GoogleARCore.Examples.HelloAR
 
         public float DropDelay = 0.5f;
 
-        public int DropHeight = 1;
-
         /// <summary>
         /// How far the drop can be away from the centre
         /// </summary>
@@ -258,14 +256,21 @@ namespace GoogleARCore.Examples.HelloAR
                     return;
                 }
 
-                Pose p = detectedPlaneVisualizer.getDetectedPlane().CenterPose;
+                DetectedPlane plane = detectedPlaneVisualizer.getDetectedPlane();
+                Pose planePos = plane.CenterPose;
                 
-                Debug.Log("Create coins");
+                float x = plane.ExtentX * 0.1f;
+                
+                Debug.Log("Event x: " + plane.ExtentX);                
+                Debug.Log("Pure x: " + x);                
+                
+                float randomRangeX = Random.Range(-x, x);
+                float randomRangeY = Random.Range(-x, x);
 
-                float randomRange1 = Random.Range(-MaxDistanceOfCentre, MaxDistanceOfCentre);
-                float randomRange2 = Random.Range(-MaxDistanceOfCentre, MaxDistanceOfCentre);
-                
-                GameObject andyObject = Instantiate(CoinsPrefab, p.position + new Vector3(randomRange1, DropHeight, randomRange2), p.rotation);
+                Debug.Log("Random x: " + randomRangeX);
+                Debug.Log("Random y: " + randomRangeY);
+
+                GameObject andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
