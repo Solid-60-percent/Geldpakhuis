@@ -78,9 +78,20 @@ namespace GoogleARCore.Examples.HelloAR
 
         public int Saldo = 10;
 
+        public float DropDelay = 0.5f;
+
+        public int DropHeight = 1;
+
+        /// <summary>
+        /// How far the drop can be away from the centre
+        /// </summary>
+        public float MaxDistanceOfCentre = 0.25f;
+        
         private const int _coinValue = 1;
 
-        private static bool canDelay = true; 
+        private static bool canDelay = true;
+
+        private Random _random = new Random(); 
         
         /// <summary>
         /// The Unity Update() method.
@@ -155,8 +166,8 @@ namespace GoogleARCore.Examples.HelloAR
 
                     if (canDelay)
                     {
-//                        DelayLoop(hit, numberOfLoops);                        
-                        InstantiateObject(hit);
+                        DelayLoop(hit, numberOfLoops);                        
+//                        InstantiateObject(hit);
                     }
                 }
             }
@@ -210,7 +221,7 @@ namespace GoogleARCore.Examples.HelloAR
             {            
                 InstantiateObject(hit);
 //                Debug.Log("Object: " + i);
-                yield return new WaitForSeconds((float) 0.5);
+                yield return new WaitForSeconds(DropDelay);
             }
             
             Debug.Log("End delay loop"); 
@@ -250,10 +261,11 @@ namespace GoogleARCore.Examples.HelloAR
                 Pose p = detectedPlaneVisualizer.getDetectedPlane().CenterPose;
                 
                 Debug.Log("Create coins");
-                    
-//                GameObject andyObject = Instantiate(CoinsPrefab, hit.Pose.position, hit.Pose.rotation);
-//                GameObject andyObject = Instantiate(CoinsPrefab, p.position, p.rotation);
-                GameObject andyObject = Instantiate(CoinsPrefab, p.position + new Vector3(0,1,0), p.rotation);
+
+                float randomRange1 = Random.Range(-MaxDistanceOfCentre, MaxDistanceOfCentre);
+                float randomRange2 = Random.Range(-MaxDistanceOfCentre, MaxDistanceOfCentre);
+                
+                GameObject andyObject = Instantiate(CoinsPrefab, p.position + new Vector3(randomRange1, DropHeight, randomRange2), p.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
