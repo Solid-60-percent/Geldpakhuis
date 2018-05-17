@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33846783720236252}
   - component: {fileID: 23849205666072944}
   - component: {fileID: 111895991830044600}
+  - component: {fileID: 54463629010376932}
+  - component: {fileID: 65460034200129018}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -37,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1207047601364346}
   m_LocalRotation: {x: -0.29680663, y: 0.5701594, z: 0.6794896, w: 0.35372025}
   m_LocalPosition: {x: -0, y: 0.0070956512, z: -0.010957481}
-  m_LocalScale: {x: 0.0059159915, y: 0.005915992, z: 0.005915992}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,6 +86,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1207047601364346}
   m_Mesh: {fileID: 4300000, guid: e8449808043a6114eb825a7cbbf749bf, type: 3}
+--- !u!54 &54463629010376932
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1207047601364346}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65460034200129018
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1207047601364346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.066545, y: 4.1428943, z: 1.4841292}
+  m_Center: {x: -1.8644592, y: 0.9990303, z: -0.4465012}
 --- !u!111 &111895991830044600
 Animation:
   m_ObjectHideFlags: 1

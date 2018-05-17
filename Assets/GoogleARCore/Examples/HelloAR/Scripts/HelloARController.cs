@@ -93,7 +93,8 @@ namespace GoogleARCore.Examples.HelloAR
 
             SearchingForPlaneUI.SetActive(showSearchingUI);
 
-            
+            #region INPUT REACTION
+
             // if there is phone input....
             Touch touch;
             if (Input.touchCount < 0)
@@ -172,8 +173,7 @@ namespace GoogleARCore.Examples.HelloAR
                     }
                 }
             }
-
-            
+            #endregion
         }
 
         /// <summary>
