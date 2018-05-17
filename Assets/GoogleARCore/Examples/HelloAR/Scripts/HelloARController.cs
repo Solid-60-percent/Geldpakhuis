@@ -76,7 +76,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
-        public int Saldo = 10;
+        public int Saldo = 100;
 
         public float DropDelay = 0.5f;
 
