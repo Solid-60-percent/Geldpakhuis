@@ -245,6 +245,8 @@ namespace GoogleARCore.Examples.Common
                 m_MeshIndices.Add(lowerVertex2);
 
             }
+
+            gameObject.GetComponent<BoxCollider>().center = m_PlaneCenter - new Vector3(0, 0.5f, 0);
             
             m_Mesh.Clear();
             m_Mesh.SetVertices(m_MeshVertices);
