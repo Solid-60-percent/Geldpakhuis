@@ -16,7 +16,7 @@ public class CoinScript : MonoBehaviour {
 		while (isMoving)
 		{
 			Vector3 posBefore = gameObject.transform.position;
-			yield return new WaitForSecondsRealtime(1);
+			yield return new WaitForSecondsRealtime(2);
 			Vector3 posAfter = gameObject.transform.position;
 			
 			if (Vector3.Distance(posBefore, posAfter) < 0.01f)

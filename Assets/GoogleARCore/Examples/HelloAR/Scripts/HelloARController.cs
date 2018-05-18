@@ -52,6 +52,8 @@ namespace GoogleARCore.Examples.HelloAR
         /// A model to place when a raycast from a user touch hits a plane.
         /// </summary>
         public GameObject CoinsPrefab;
+
+        public GameObject BallPrefab;
         public GameObject AndyAndroidPrefab;
 
         /// <summary>
@@ -83,6 +85,8 @@ namespace GoogleARCore.Examples.HelloAR
         public int DropHeight = 1;
 
         private const int _coinValue = 1;
+        private const int _ballValue = 15;
+        private int selectedModel = 0;
 
         private static bool canDelay = true;
 
@@ -169,35 +173,24 @@ namespace GoogleARCore.Examples.HelloAR
         }
 
         /// <summary>
-        /// returns true if you can render coin
-        /// TODO remove/ ignore if loop works well 
-        /// </summary>
-        private bool HasEnoughSaldoToGenerate()
-        {
-            if (Saldo - _coinValue > 0)
-            {
-                Saldo -= _coinValue;
-                return true; 
-            }
-            else
-            {
-                Debug.Log("Not enough saldo to generate");
-                // not enough money in saldo return false
-                return false;
-            }    
-        }
-
-        /// <summary>
         /// Divedes salde by coinvalue to calculate how many coins can drop
         /// </summary>
         private int GetNumberOfLoops()
         {
-            int nLoops = Saldo / _coinValue;
+            if (selectedModel == 0)
+            {
+                int nLoops = Saldo / _ballValue;
+                return nLoops;
+            }
+            else
+            {
+                int nLoops = Saldo / _coinValue;
             
-            Debug.Log("Saldo: " + nLoops);
-            Debug.Log("coin value: " + nLoops);
-            Debug.Log("nLoops: " + nLoops);
-            return nLoops;
+                Debug.Log("Saldo: " + nLoops);
+                Debug.Log("coin value: " + nLoops);
+                Debug.Log("nLoops: " + nLoops);
+                return nLoops;
+            }
         }
 
         /// <summary>
@@ -240,11 +233,6 @@ namespace GoogleARCore.Examples.HelloAR
         /// <param name="hit"></param>
         private void InstantiateObject(TrackableHit hit, Pose planePos, float x)
         {
-            if (!HasEnoughSaldoToGenerate())
-            {
-                return;
-            }
-            
             // Use hit pose and camera pose to check if hittest is from the
             // back of the plane, if it is, no need to create the anchor.
             if (hit.Trackable is DetectedPlane &&
@@ -262,8 +250,16 @@ namespace GoogleARCore.Examples.HelloAR
                 
                 float randomRangeX = Random.Range(-x, x);
                 float randomRangeY = Random.Range(-x, x);
-
-                GameObject andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
+                GameObject andyObject;
+                if (selectedModel == 1)
+                {
+                    andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
+                }
+                else
+                {
+                    andyObject = Instantiate(BallPrefab,
+                        planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
+                }
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
@@ -319,6 +315,16 @@ namespace GoogleARCore.Examples.HelloAR
             }
         }
 
+        public void Button0()
+        {
+            selectedModel = 0;
+        }
+
+        public void Button1()
+        {
+            selectedModel = 1;
+        }
+        
         /// <summary>
         /// Actually quit the application.
         /// </summary>
