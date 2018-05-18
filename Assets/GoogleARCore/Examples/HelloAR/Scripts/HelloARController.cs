@@ -23,6 +23,7 @@ using System.Collections;
 
 namespace GoogleARCore.Examples.HelloAR
 {
+    using UnityEngine.XR;
     using System.Collections.Generic;
     using GoogleARCore;
     using GoogleARCore.Examples.Common;
@@ -39,6 +40,7 @@ namespace GoogleARCore.Examples.HelloAR
     /// </summary>
     public class HelloARController : MonoBehaviour
     {
+        private List<GameObject> objects = new List<GameObject>();
         public Slider superSlider;
         Text SaldoText;
         /// <summary>
@@ -81,7 +83,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private bool m_IsQuitting = false;
 
-        public int Saldo = 10;
+        public int Saldo;
 
         public float DropDelay = 0.5f;
 
@@ -142,16 +144,15 @@ namespace GoogleARCore.Examples.HelloAR
                         numberOfLoops = GetNumberOfLoops();
                         DelayLoop(hit, numberOfLoops);
                         //                        InstantiateObject(hit);
-                        superSaldo = PlayerPrefs.GetInt("saldo");
                         if (selectedModel == 0)
                         {
-                            superSlider.normalizedValue = (float)numberOfLoops / (float)(superSaldo / _ballValue);
-                            SaldoText.text = numberOfLoops.ToString();
+                           
+                            //SaldoText.text = numberOfLoops.ToString();
                         }
                         else
                         {
-                            superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
-                            SaldoText.text = numberOfLoops.ToString();
+                            //superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
+// SaldoText.text = numberOfLoops.ToString();
                         }
                     }
                     else
@@ -180,12 +181,12 @@ namespace GoogleARCore.Examples.HelloAR
                     int superSaldo = PlayerPrefs.GetInt("saldo");
                     if (selectedModel == 0)
                     {
-                        superSlider.normalizedValue = (float)numberOfLoops / (float)(superSaldo / _ballValue);
-                        SaldoText.text = numberOfLoops.ToString();
+                        //superSlider.normalizedValue = (float)numberOfLoops / (float)(superSaldo / _ballValue);
+                       // SaldoText.text = numberOfLoops.ToString();
                     } else
                     {
-                        superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
-                        SaldoText.text = numberOfLoops.ToString();
+                        //superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
+                       // SaldoText.text = numberOfLoops.ToString();
                     }
                     if (canDelay)
                     {
@@ -242,10 +243,21 @@ namespace GoogleARCore.Examples.HelloAR
             float x = plane.ExtentX * 0.1f;   
 
             for (int i = 0; i < numberOfLoops1; i++)
-            {            
+            {
+               
                 InstantiateObject(hit, planePos, x);
 //                Debug.Log("Object: " + i);
                 yield return new WaitForSeconds(DropDelay);
+                int i2 = i+1;
+                SaldoText.text = i2.ToString();
+                if(selectedModel == 0)
+                {
+                    superSlider.normalizedValue = (float)i2 / (float)(superSaldo / _ballValue);
+                }
+                else
+                {
+                    superSlider.normalizedValue = (float)i2 / (float)superSaldo;
+                }
             }
             
             Debug.Log("End delay loop"); 
@@ -284,6 +296,7 @@ namespace GoogleARCore.Examples.HelloAR
                     andyObject = Instantiate(BallPrefab,
                         planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
                 }
+                objects.Add(andyObject);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
@@ -294,9 +307,16 @@ namespace GoogleARCore.Examples.HelloAR
 
                 // Make Andy model a child of the anchor.
                 andyObject.transform.parent = anchor.transform;
+// superSlider.normalizedValue = (float)numberOfLoops / (float)(superSaldo / _ballValue);
+  //              SaldoText.text = numberOfLoops.ToString();
             }
         }
-        
+        public void clearARComponents()
+        {
+            
+        }
+    
+
         /// <summary>
         /// Check and update the application lifecycle.
         /// </summary>
@@ -340,7 +360,8 @@ namespace GoogleARCore.Examples.HelloAR
         }
         public void Start()
         {
-          
+            Saldo = PlayerPrefs.GetInt("saldo");
+            superSaldo = PlayerPrefs.GetInt("saldo");
             GameObject temp = GameObject.Find("superSlider");
             superSlider = temp.GetComponent<Slider>();
 
@@ -360,11 +381,19 @@ namespace GoogleARCore.Examples.HelloAR
                 selectedModel = 0;
                 superSlider.normalizedValue = 0;
                 SaldoText.text = numberOfLoops.ToString();
+                destroyGames();
+                objects = new List<GameObject>();
 
             }
 
         }
-
+        public void destroyGames()
+        {
+            foreach (GameObject g in objects)
+            {
+                Destroy(g);
+            }
+        }
         public void Button1()
         {
             if (selectedModel == 1)
@@ -376,6 +405,8 @@ namespace GoogleARCore.Examples.HelloAR
                 selectedModel = 1;
                 superSlider.normalizedValue = 0;
                 SaldoText.text = numberOfLoops.ToString();
+                destroyGames();
+                objects = new List<GameObject>();
             }
 
         }
