@@ -261,9 +261,9 @@ namespace GoogleARCore.Examples.HelloAR
                 
                 
                 float randomRangeX = Random.Range(-x, x);
-                //float randomRangeY = Random.Range(-x, x);
+                float randomRangeY = Random.Range(-x, x);
 
-                GameObject andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeX), planePos.rotation);
+                GameObject andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
 
                 // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
                 andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
