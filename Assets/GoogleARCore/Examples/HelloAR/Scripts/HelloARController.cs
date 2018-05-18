@@ -60,6 +60,9 @@ namespace GoogleARCore.Examples.HelloAR
 
         public GameObject BallPrefab;
         public GameObject AndyAndroidPrefab;
+        public GameObject BurgerPrefab;
+        public GameObject ChipsPrefab;
+        public GameObject BananaPrefab;
 
         /// <summary>
         /// A gameobject parenting UI for displaying the "searching for planes" snackbar.
@@ -91,6 +94,9 @@ namespace GoogleARCore.Examples.HelloAR
 
         private const int _coinValue = 1;
         private const int _ballValue = 15;
+        private const int _burgerValue = 3;
+        private const int _chipsValue = 2;
+        private const int _bananaValue = 1;
         private int selectedModel = 0;
         int numberOfLoops=0;
         int superSaldo =0;
@@ -206,6 +212,20 @@ namespace GoogleARCore.Examples.HelloAR
             {
                 int nLoops = Saldo / _ballValue;
                 return nLoops;
+            } else if (selectedModel == 2)
+            {
+                int nLoops = Saldo / _burgerValue;
+                return nLoops;
+            }
+            else if (selectedModel == 3)
+            {
+                int nLoops = Saldo / _chipsValue;
+                return nLoops;
+            }
+            else if (selectedModel == 4)
+            {
+                int nLoops = Saldo / _bananaValue;
+                return nLoops;
             }
             else
             {
@@ -253,6 +273,17 @@ namespace GoogleARCore.Examples.HelloAR
                 if(selectedModel == 0)
                 {
                     superSlider.normalizedValue = (float)i2 / (float)(superSaldo / _ballValue);
+                } else if(selectedModel == 2)
+                {
+                    superSlider.normalizedValue = (float)i2 / (float)(superSaldo / _burgerValue);
+                }
+                else if (selectedModel == 3)
+                {
+                    superSlider.normalizedValue = (float)i2 / (float)(superSaldo / _chipsValue);
+                }
+                else if (selectedModel == 4)
+                {
+                    superSlider.normalizedValue = (float)i2 / (float)(superSaldo / _bananaValue);
                 }
                 else
                 {
@@ -290,6 +321,16 @@ namespace GoogleARCore.Examples.HelloAR
                 if (selectedModel == 1)
                 {
                     andyObject = Instantiate(CoinsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
+                } else if (selectedModel == 2){
+                    andyObject = Instantiate(BurgerPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
+                }
+                else if (selectedModel == 3)
+                {
+                    andyObject = Instantiate(ChipsPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
+                }
+                else if (selectedModel == 4)
+                {
+                    andyObject = Instantiate(BananaPrefab, planePos.position + new Vector3(randomRangeX, DropHeight, randomRangeY), planePos.rotation);
                 }
                 else
                 {
@@ -410,7 +451,56 @@ namespace GoogleARCore.Examples.HelloAR
             }
 
         }
-        
+
+        public void Button2()
+        {
+            if (selectedModel == 2)
+            {
+
+            }
+            else
+            {
+                selectedModel = 2;
+                superSlider.normalizedValue = 0;
+                SaldoText.text = numberOfLoops.ToString();
+                destroyGames();
+                objects = new List<GameObject>();
+            }
+
+        }
+        public void Button3()
+        {
+            if (selectedModel == 3)
+            {
+
+            }
+            else
+            {
+                selectedModel = 3;
+                superSlider.normalizedValue = 0;
+                SaldoText.text = numberOfLoops.ToString();
+                destroyGames();
+                objects = new List<GameObject>();
+            }
+
+        }
+        public void Button4()
+        {
+            if (selectedModel == 4)
+            {
+
+            }
+            else
+            {
+                selectedModel = 4;
+                superSlider.normalizedValue = 0;
+                SaldoText.text = numberOfLoops.ToString();
+                destroyGames();
+                objects = new List<GameObject>();
+            }
+
+        }
+
         /// <summary>
         /// Actually quit the application.
         /// </summary>
