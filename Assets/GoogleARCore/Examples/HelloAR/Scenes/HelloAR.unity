@@ -390,13 +390,11 @@ MonoBehaviour:
     type: 2}
   CoinsPrefab: {fileID: 1878150925236434, guid: bd558a768de2a8341addfe87cf294228,
     type: 2}
-  SoccerBallPrefab: {fileID: 1975457108487340, guid: ec3e8f3ed27e2244caaedaf589590a03,
-    type: 2}
+  BallPrefab: {fileID: 1975457108487340, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 2}
   AndyAndroidPrefab: {fileID: 1190091649889860, guid: 242a320930b81430ba610f94f9b760c8,
     type: 2}
   SearchingForPlaneUI: {fileID: 1133631540}
   PlaneGenerator: {fileID: 2083512464}
-  selectedButton: 0
   Saldo: 1000
   DropDelay: 0.01
   DropHeight: 1
@@ -729,7 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
