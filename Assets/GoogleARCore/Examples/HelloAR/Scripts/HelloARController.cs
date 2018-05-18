@@ -27,6 +27,7 @@ namespace GoogleARCore.Examples.HelloAR
     using GoogleARCore;
     using GoogleARCore.Examples.Common;
     using UnityEngine;
+    using UnityEngine.UI;
 
 #if UNITY_EDITOR
     // Set up touch input propagation while using Instant Preview in the editor.
@@ -38,6 +39,7 @@ namespace GoogleARCore.Examples.HelloAR
     /// </summary>
     public class HelloARController : MonoBehaviour
     {
+        public Slider superSlider;
         /// <summary>
         /// The first-person camera being used to render the passthrough camera image (i.e. AR background).
         /// </summary>
@@ -137,7 +139,9 @@ namespace GoogleARCore.Examples.HelloAR
 
                         int numberOfLoops = GetNumberOfLoops();
                         DelayLoop(hit, numberOfLoops);
-//                        InstantiateObject(hit);
+                        //                        InstantiateObject(hit);
+                        int superSaldo = PlayerPrefs.GetInt("saldo");
+                        superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
                     }
                     else
                     {
@@ -162,7 +166,8 @@ namespace GoogleARCore.Examples.HelloAR
                 {
                     Debug.Log("Start looping");
                     int numberOfLoops = GetNumberOfLoops();
-
+                    int superSaldo = PlayerPrefs.GetInt("saldo");
+                    superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
                     if (canDelay)
                     {
                         DelayLoop(hit, numberOfLoops);                        
@@ -313,6 +318,14 @@ namespace GoogleARCore.Examples.HelloAR
                 m_IsQuitting = true;
                 Invoke("_DoQuit", 0.5f);
             }
+        }
+        public void Start()
+        {
+            GameObject temp = GameObject.Find("superSlider");
+            superSlider = temp.GetComponent<Slider>();
+
+
+            
         }
 
         public void Button0()
