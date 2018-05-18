@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/ExampleUI/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/GoogleARCore/Examples/HelloAR/Scenes/MainManuScreenshot.unity
+    guid: 55ac8de9ceccda642a7a511192c4dcd8
+  - enabled: 1
+    path: Assets/GoogleARCore/Examples/HelloAR/Scenes/tempscene.unity
+    guid: 07e4412225851db43a366b5cb078d654
+  - enabled: 0
     path: Assets/GoogleARCore/Examples/HelloAR/Scenes/HelloAR.unity
     guid: e6a6fa04348cb45c9b0221eb19c946da
   m_configObjects: {}
