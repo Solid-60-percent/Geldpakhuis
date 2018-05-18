@@ -40,6 +40,7 @@ namespace GoogleARCore.Examples.HelloAR
     public class HelloARController : MonoBehaviour
     {
         public Slider superSlider;
+        Text SaldoText;
         /// <summary>
         /// The first-person camera being used to render the passthrough camera image (i.e. AR background).
         /// </summary>
@@ -89,7 +90,8 @@ namespace GoogleARCore.Examples.HelloAR
         private const int _coinValue = 1;
         private const int _ballValue = 15;
         private int selectedModel = 0;
-
+        int numberOfLoops=0;
+        int superSaldo =0;
         private static bool canDelay = true;
 
         /// <summary>
@@ -137,11 +139,20 @@ namespace GoogleARCore.Examples.HelloAR
                     {
                         Debug.Log("he he het werkt eindelijk...");
 
-                        int numberOfLoops = GetNumberOfLoops();
+                        numberOfLoops = GetNumberOfLoops();
                         DelayLoop(hit, numberOfLoops);
                         //                        InstantiateObject(hit);
-                        int superSaldo = PlayerPrefs.GetInt("saldo");
-                        superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
+                        superSaldo = PlayerPrefs.GetInt("saldo");
+                        if (selectedModel == 0)
+                        {
+                            superSlider.normalizedValue = (float)numberOfLoops / (float)(superSaldo / _ballValue);
+                            SaldoText.text = numberOfLoops.ToString();
+                        }
+                        else
+                        {
+                            superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
+                            SaldoText.text = numberOfLoops.ToString();
+                        }
                     }
                     else
                     {
@@ -165,9 +176,17 @@ namespace GoogleARCore.Examples.HelloAR
                 if (Frame.Raycast(Input.mousePosition.x, Input.mousePosition.y, raycastFilter, out hit))
                 {
                     Debug.Log("Start looping");
-                    int numberOfLoops = GetNumberOfLoops();
+                    numberOfLoops = GetNumberOfLoops();
                     int superSaldo = PlayerPrefs.GetInt("saldo");
-                    superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
+                    if (selectedModel == 0)
+                    {
+                        superSlider.normalizedValue = (float)numberOfLoops / (float)(superSaldo / _ballValue);
+                        SaldoText.text = numberOfLoops.ToString();
+                    } else
+                    {
+                        superSlider.normalizedValue = (float)numberOfLoops / (float)superSaldo;
+                        SaldoText.text = numberOfLoops.ToString();
+                    }
                     if (canDelay)
                     {
                         DelayLoop(hit, numberOfLoops);                        
@@ -201,12 +220,12 @@ namespace GoogleARCore.Examples.HelloAR
         /// <summary>
         /// Starts the coroutine for the delayed loop
         /// </summary>
-        private void DelayLoop(TrackableHit hit, int numberOfLoops)
+        private void DelayLoop(TrackableHit hit, int numberOfLoops1)
         {
-            StartCoroutine(Corotine(hit, numberOfLoops));
+            StartCoroutine(Corotine(hit, numberOfLoops1));
         }
 
-        private IEnumerator Corotine(TrackableHit hit, int numberOfLoops)
+        private IEnumerator Corotine(TrackableHit hit, int numberOfLoops1)
         {
             Debug.Log("Start delay loop"); 
             
@@ -222,7 +241,7 @@ namespace GoogleARCore.Examples.HelloAR
             
             float x = plane.ExtentX * 0.1f;   
 
-            for (int i = 0; i < numberOfLoops; i++)
+            for (int i = 0; i < numberOfLoops1; i++)
             {            
                 InstantiateObject(hit, planePos, x);
 //                Debug.Log("Object: " + i);
@@ -321,21 +340,44 @@ namespace GoogleARCore.Examples.HelloAR
         }
         public void Start()
         {
+          
             GameObject temp = GameObject.Find("superSlider");
             superSlider = temp.GetComponent<Slider>();
 
+            GameObject temp2 = GameObject.Find("TextSaldo");
+            SaldoText = temp2.GetComponent<Text>();
 
-            
         }
 
         public void Button0()
         {
-            selectedModel = 0;
+            if (selectedModel == 0)
+            {
+                
+            }
+            else
+            {
+                selectedModel = 0;
+                superSlider.normalizedValue = 0;
+                SaldoText.text = numberOfLoops.ToString();
+
+            }
+
         }
 
         public void Button1()
         {
-            selectedModel = 1;
+            if (selectedModel == 1)
+            {
+
+            }
+            else
+            {
+                selectedModel = 1;
+                superSlider.normalizedValue = 0;
+                SaldoText.text = numberOfLoops.ToString();
+            }
+
         }
         
         /// <summary>
